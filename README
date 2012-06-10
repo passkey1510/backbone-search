@@ -1,1 +1,3 @@
 This is an example of search box on multiple APIs using Backbone and RequireJS
+
+If you want to try this out on a Chrome browser, you should put the whole directory into a webserver. Otherwise, you could run index.html file directly on Firefox.
