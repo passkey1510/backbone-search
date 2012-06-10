@@ -18,7 +18,7 @@ define([
 
       render: function () {
           $(this.el).html(searchTemplate);
-          $('#results', this.el).append(this.searchresultsView.render().el);
+          $('#results').append(this.searchresultsView.render().el);
           return this;
       },
 
