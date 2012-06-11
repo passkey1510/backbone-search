@@ -5,7 +5,13 @@ define([
   'Backbone',
   'views/home/main',
   'views/search/search',
-], function($, _, Backbone, mainHomeView, SearchView){
+  'views/services/services',
+  'models/service',
+  'collections/services',
+  'collections/videos',
+  'collections/tweets',
+  'views/results/list'
+], function($, _, Backbone, mainHomeView, SearchView, ServicesView, Service, ServicesCollection, VideoList, TweetList, ResultsListView){
   var AppRouter = Backbone.Router.extend({
     routes: {
       "": "home",
@@ -14,15 +20,41 @@ define([
       '*actions': 'defaultAction'
     },
     initialize: function () {
+        var serviceYouTube = new Service({name: "YouTube", value: "YouTube"});
+        this.servicesView = new ServicesView({
+          collection: new ServicesCollection([
+            new Service({name: "YouTube", value: "YouTube"}),
+            new Service({name: "Twitter", value: "Twitter"})
+          ])
+        });
         this.searchView = new SearchView();
         $('.search').html(this.searchView.render().el);
-        // $('.player').html(this.playerView.render().el);
-        // Close the search dropdown on click anywhere in the UI
-        $('body').click(function () {
-            $('.dropdown').removeClass("open");
-        });
+        $('.services').html(this.servicesView.render().el);
+        // Create an empty results view
+        this.searchResultsView = new ResultsListView();
+        $('#results').html(this.searchResultsView.render().el);
+        this.searchView.bind('search', this.search, this);
     },
-
+    //Handle search action based on current service
+    search: function(data) {
+      var currentService = $('.services select').val();
+      console.log("search entered on service " + currentService + " - " + data.key);
+      
+      
+      
+      switch (currentService) {
+        case "YouTube":
+          var searchResults = new VideoList();
+          this.searchResultsView.setModel(searchResults);
+          searchResults.findByName(data.key);
+          break;
+        case "Twitter":
+          var searchResults = new TweetList();
+          this.searchResultsView.setModel(searchResults);
+          searchResults.findByName(data.key);
+          break;
+      }
+    },
     home: function () {
         // Since the home view never changes, we instantiate it and render it only once
         // if (!this.homeView) {

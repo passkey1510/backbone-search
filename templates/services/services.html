@@ -1,0 +1,5 @@
+<select>
+	<% _.each(services, function(service){ %>
+	   <option value="<%= service.get("value")%>"><%= service.get("name") %></option> 
+	<% }); %>
+</select>

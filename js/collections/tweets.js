@@ -5,7 +5,7 @@ define([
   'models/video'
 ], function($, _, Backbone, videoModel){
   var videosCollection = Backbone.Collection.extend({
-    url : "https://gdata.youtube.com/feeds/api/videos/",
+    url : "http://search.twitter.com/search.json",
     parse : function(response) {
       console.log('parsing data');
       return response.data.items;
@@ -17,13 +17,13 @@ define([
         url : self.url,
         dataType : "jsonp",
         data: {
-          v : "2",
-          alt : "jsonc",
+          // v : "2",
+          // alt : "jsonc",
           q : key
         },
         success : function(data) {
-          console.log("search success: " + data.data.items.length);
-          self.reset(data.data.items);
+          console.log("search success: " + data.results.length);
+          self.reset(data.results);
         }
 
       });
