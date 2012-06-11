@@ -4,15 +4,7 @@ define([
   'Underscore',
   'Backbone',
   'views/home/main',
-  'models/search/manager',
-
-  // 'views/search/search',
-  // 'views/services/services',
-  // 'models/service',
-  // 'collections/services',
-  // 'collections/videos',
-  // 'collections/tweets',
-  // 'views/results/list'
+  'models/search/manager'
 ], function($, _, Backbone, mainHomeView, SearchManager){
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -25,20 +17,10 @@ define([
         this.searchManager = new SearchManager({
           services: [{name: "YouTube", value: "YouTube"}, {name: "Twitter", value: "Twitter"}]
         });
-        // var serviceYouTube = new Service({name: "YouTube", value: "YouTube"});
-        // this.servicesView = new ServicesView({
-        //   collection: new ServicesCollection([
-        //     new Service({name: "YouTube", value: "YouTube"}),
-        //     new Service({name: "Twitter", value: "Twitter"})
-        //   ])
-        // });
-        // this.searchView = new SearchView();
         $('.search').html(this.searchManager.getSearchView().render().el);
         $('.services').html(this.searchManager.getServicesView().render().el);
         // Create an empty results view
         $('#results').html(this.searchManager.getSearchResultsView().render().el);
-        // $('#results').html(this.searchResultsView.render().el);
-        // this.searchView.bind('search', this.search, this);
     },
     
     home: function () {

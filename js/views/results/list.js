@@ -17,7 +17,7 @@ define([
     render:function () {
         $(this.el).empty();
         _.each(this.model.models, function (item) {
-            $(this.el).append(new ItemView({model:item}).render().el);
+            $(this.el).append(new ItemView({model:item, template: this.itemTemplate}).render().el);
         }, this);
         return this;
     },
@@ -27,8 +27,12 @@ define([
       var self = this;
       this.model.bind("reset", this.render, this);
       this.model.bind("add", function (item) {
-          $(self.el).append(ItemView({model:item}).render().el);
+          $(self.el).append(ItemView({model:item, template: this.itemTemplate}).render().el);
       });
+    },
+
+    setItemTemplate: function(template){
+      this.itemTemplate = template;
     }
   });
 

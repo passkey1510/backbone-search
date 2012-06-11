@@ -8,7 +8,7 @@ require.config({
     // loader: 'libs/backbone/loader',
     jQuery: 'libs/jquery/jquery.min',
     Underscore: 'libs/underscore/underscore-min',
-    Backbone: 'libs/backbone/backbone-min',
+    Backbone: 'libs/backbone/backbone',
     templates: '../templates'
   },
   shim: {

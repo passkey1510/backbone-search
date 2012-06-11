@@ -1,21 +1,19 @@
 define([
   'jQuery',
   'Underscore',
-  'Backbone',
-  'text!templates/results/item.html',
-  'models/video'
-], function($, _, Backbone, resultsItemTemplate, videoModel){
+  'Backbone'
+], function($, _, Backbone){
 
     var resultsItemView = Backbone.View.extend({
       tagName:"li",
-      model: videoModel,
-      initialize:function () {
+      initialize:function (options) {
           this.model.bind("change", this.render, this);
           this.model.bind("destroy", this.close, this);
+          this.template = options.template;
       },
 
       render:function () {
-          $(this.el).html(_.template(resultsItemTemplate, this.model.toJSON()));
+          $(this.el).html(_.template(this.template, this.model.toJSON()));
           return this;
       }
     });

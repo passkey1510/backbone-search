@@ -5,6 +5,7 @@ define([
   'models/video'
 ], function($, _, Backbone, videoModel){
   var videosCollection = Backbone.Collection.extend({
+    model: videoModel,
     url : "https://gdata.youtube.com/feeds/api/videos/",
     parse : function(response) {
       console.log('parsing data');

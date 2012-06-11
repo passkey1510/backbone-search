@@ -2,9 +2,10 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/video'
-], function($, _, Backbone, videoModel){
+  'models/tweet'
+], function($, _, Backbone, tweetModel){
   var videosCollection = Backbone.Collection.extend({
+    model: tweetModel,
     url : "http://search.twitter.com/search.json",
     parse : function(response) {
       console.log('parsing data');

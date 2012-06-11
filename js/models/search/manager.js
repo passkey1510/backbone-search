@@ -34,8 +34,9 @@ define([
       var currentService = $('select', this.servicesView.el).val();
       console.log("search entered on service " + currentService + " - " + data.key);
       var searchResults = ResultsFactory.createSearchResults(currentService);
-      this.searchResultsView.setModel(searchResults);
-      searchResults.findByKeyWord(data.key);
+      this.searchResultsView.setModel(searchResults.collection);
+      this.searchResultsView.setItemTemplate(searchResults.template);
+      searchResults.collection.findByKeyWord(data.key);
     },
   });
   return SearchManager;
