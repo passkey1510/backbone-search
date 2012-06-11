@@ -10,7 +10,7 @@ define([
       console.log('parsing data');
       return response.data.items;
     },
-    findByName : function(key) {
+    findByKeyWord : function(key) {
       console.log('findByName: ' + key);
       var self = this;
       $.ajax({
